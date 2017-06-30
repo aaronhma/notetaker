@@ -23,7 +23,7 @@ class message extends Component {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'Github Notetaker',
+          title: 'Second Hand Helpers Team Notetaker',
           component: Main
       }} />
       );
