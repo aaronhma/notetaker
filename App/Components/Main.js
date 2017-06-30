@@ -100,8 +100,9 @@ export default class Main extends Component {
             <View style={styles.mainContainer}>
                 <Text style={styles.title}> Search for a Github User </Text>
                 <TextInput
+                    autoCorrect={false}
                     style={styles.searchInput}
-                    value={this.state.username}
+                    value={this.state.username.toLowerCase()}
                     onChange={this.handleChange.bind(this)} />
                 <TouchableHighlight
                     style={styles.button}
