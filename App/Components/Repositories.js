@@ -7,8 +7,10 @@ import {
   Text,
   View,
   TouchableHighlight,
-  Stylesheet
+  StyleSheet
 } from 'react-native';
+
+import Separator from './Helpers/Separator';
 
 let styles = StyleSheet.create({
   container: {
@@ -35,7 +37,7 @@ let styles = StyleSheet.create({
   }
 });
 
-class Repositories extends Component {
+export default class Repositories extends Component {
   openPage(url) {
     console.log('the url is', url);
   }
