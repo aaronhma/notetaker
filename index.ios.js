@@ -17,7 +17,7 @@ let styles = StyleSheet.create({
   },
 });
 
-class message extends Component {
+export default class message extends Component {
   render() {
       return (
       <NavigatorIOS

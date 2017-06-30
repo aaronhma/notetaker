@@ -1,83 +1,74 @@
 import React, { Component } from 'react';
+import Badge from './Badge';
+import Separator from './Helpers/Separator';
+import PropTypes from 'prop-types';
 
 import {
+  ScrollView,
   Text,
   View,
-  StyleSheet,
-  Image,
-  TouchableHighlight
+  TouchableHighlight,
+  StyleSheet
 } from 'react-native';
-
-import Profile from './Profile';
 
 let styles = StyleSheet.create({
   container: {
-    marginTop: 65,
-    flex: 1
+    flex: 1,
   },
-  image: {
-    height: 350,
+  rowContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    padding: 10
   },
-  buttonText: {
-    fontSize: 24,
-    color: '#fff',
-    alignSelf: 'center'
+  name: {
+    color: '#48BBEC',
+    fontSize: 18,
+    paddingBottom: 5
+  },
+  stars: {
+    color: '#48BBEC',
+    fontSize: 14,
+    paddingBottom: 5
+  },
+  description: {
+    fontSize: 14,
+    paddingBottom: 5
   }
 });
 
-export default class Dashboard extends Component {
-  makeBackground(btn){
-    var obj = {
-      flexDirection: 'row',
-      alignSelf: 'stretch',
-      justifyContent: 'center',
-      flex: 1
-    }
-    if(btn === 0){
-      obj.backgroundColor = '#48BBEC';
-    } else if (btn === 1){
-      obj.backgroundColor = '#E77AAE';
-    } else {
-      obj.backgroundColor = '#758BF4';
-    }
-    return obj;
-  }
-  goToProfile(){
-    this.props.navigator.push({
-      component: Profile,
-      title: 'Profile Page',
-      passProps: { userInfo: this.props.userInfo }
-    })
-  }
-  goToRepos(){
-    console.log('Going to Repos');
-  }
-  goToNotes(){
-    console.log('Going to Notes');
+export default class Repositories extends Component {
+  openPage(url) {
+    console.log('the url is', url);
   }
   render() {
+    let repos = this.props.repos;
+    let list = repos.map((item, index) => {
+      let desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View />;
+      return (
+        <View key={index}>
+          <View style={styles.rowContainer}>
+            <TouchableHighlight
+              onPress={this.openPage.bind(this, repos[index].html_url)}
+              underlayColor='transparent'>
+              <Text style={styles.name}>{repos[index].name}</Text>
+            </TouchableHighlight>
+            <Text style={styles.stars}> Stars: {repos[index].stargazers_count} </Text>
+            {desc}
+          </View>
+          <Separator />
+        </View>
+      )
+    });
     return (
-      <View style={styles.container}>
-        <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image}/>
-        <TouchableHighlight
-            style={this.makeBackground(0)}
-            onPress={this.goToProfile.bind(this)}
-            underlayColor="#88D4F5">
-              <Text style={styles.buttonText}>View Profile</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-            style={this.makeBackground(1)}
-            onPress={this.goToRepos.bind(this)}
-            underlayColor="#E39EBF">
-              <Text style={styles.buttonText}>View Repositories</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-            style={this.makeBackground(2)}
-            onPress={this.goToNotes.bind(this)}
-            underlayColor="#9BAAF3">
-              <Text style={styles.buttonText}>Take Notes</Text>
-        </TouchableHighlight>
-      </View>
+      <ScrollView style={styles.container}>
+        <Badge userInfo={this.props.userInfo} />
+        {list}
+      </ScrollView>
     )
   }
 };
+
+Repositories.propTypes = {
+  userInfo: PropTypes.object.isRequired,
+  repos: PropTypes.array.isRequired
+}

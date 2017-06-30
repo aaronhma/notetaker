@@ -17,12 +17,12 @@ let styles = StyleSheet.create({
     fontSize: 21,
     marginTop: 10,
     marginBottom: 5,
-    color: 'white'
+    color: '#fff'
   },
   handle: {
     alignSelf: 'center',
     fontSize: 16,
-    color: 'white'
+    color: '#fff'
   },
   image: {
     height: 125,
@@ -33,7 +33,7 @@ let styles = StyleSheet.create({
   }
 });
 
-export default class Badge extends React.Component {
+export default class Badge extends Component {
   render() {
     return (
       <View style={styles.container}>
