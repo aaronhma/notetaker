@@ -8,7 +8,7 @@ import {
     View,
     TextInput,
     TouchableHighlight,
-    ActivityIndicatorIOS,
+    ActivityIndicator,
 } from 'react-native';
 
 let styles = StyleSheet.create({
@@ -96,13 +96,15 @@ export default class Main extends Component {
             });
     }
     render() {
+        var showErr = (
+            this.state.error ? <Text> {this.state.error} </Text> : <View />
+        );
         return (
             <View style={styles.mainContainer}>
                 <Text style={styles.title}> Search for a Github User </Text>
                 <TextInput
-                    autoCorrect={false}
                     style={styles.searchInput}
-                    value={this.state.username.toLowerCase()}
+                    value={this.state.username}
                     onChange={this.handleChange.bind(this)} />
                 <TouchableHighlight
                     style={styles.button}
@@ -110,6 +112,12 @@ export default class Main extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> SEARCH </Text>
                 </TouchableHighlight>
+                <ActivityIndicator
+                    animating={this.state.isLoading}
+                    color="#111"
+                    size="large">
+                </ActivityIndicator>
+                {showErr}
             </View>
         )
     }

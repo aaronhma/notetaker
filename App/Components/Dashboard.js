@@ -16,7 +16,7 @@ let styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 24,
-    color: 'white',
+    color: '#fff',
     alignSelf: 'center'
   }
 });
