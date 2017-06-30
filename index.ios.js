@@ -11,7 +11,7 @@ import {
 import Main from './App/Components/Main';
 
 let styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: '#111111'
   },
@@ -19,14 +19,14 @@ let styles = StyleSheet.create({
 
 export default class message extends Component {
   render() {
-      return (
+    return (
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
           title: 'Second Hand Helpers Team Notetaker',
           component: Main
-      }} />
-      );
+        }} />
+    );
   }
 }
 
